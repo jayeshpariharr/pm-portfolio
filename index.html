@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Jayesh Parihar Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a product-review "decision record" — each case reads Problem → Decision → Measure. Monochrome, one ink colour. */
+:root{
+  --paper:#FAFAFA; --sheet:#FFFFFF; --ink:#18181B; --muted:#5F5F67; --line:#E4E4E7;
+  --accent:#18181B; --accent-soft:#F1F1F3; --chip:#F4F4F5; --scrim:rgba(9,9,11,.72);
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#0E0E10; --sheet:#17171A; --ink:#EDEDEF; --muted:#A1A1AA; --line:#2A2A2F;
+  --accent:#EDEDEF; --accent-soft:#222226; --chip:#1F1F23; --scrim:rgba(0,0,0,.8); color-scheme:dark } }
+:root[data-theme="dark"]{
+  --paper:#0E0E10; --sheet:#17171A; --ink:#EDEDEF; --muted:#A1A1AA; --line:#2A2A2F;
+  --accent:#EDEDEF; --accent-soft:#222226; --chip:#1F1F23; --scrim:rgba(0,0,0,.8); color-scheme:dark }
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+img{max-width:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55}
+a{color:var(--ink)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.12}
+p{margin:0}
+.label{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:color-mix(in srgb, var(--paper) 88%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.mark{font-family:var(--f-display);font-weight:700;font-size:18px;color:var(--ink);text-decoration:none}
+.top nav{display:flex;gap:18px;flex-wrap:wrap}
+.top nav a{color:var(--muted);text-decoration:none;font-size:15px}
+.top nav a:hover{color:var(--ink)}
+
+/* hero */
+.hero{padding-block:64px 40px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px;align-items:end}
+.hero h1{font-size:clamp(36px,6vw,64px);font-weight:700;letter-spacing:-.02em;margin-top:14px}
+.hero h1 em{font-style:normal;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px;text-decoration-color:var(--line)}
+.hero .lede{margin-top:20px;max-width:58ch;color:var(--muted);font-size:19px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:8px;font-weight:600;text-decoration:none;font-size:16px;border:1px solid var(--ink);color:var(--ink);background:transparent;cursor:pointer;font-family:var(--f-body)}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.facts{border-left:1px solid var(--line);padding-left:20px;display:grid;gap:16px}
+.fact b{display:block;font-family:var(--f-display);font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
+.fact span{color:var(--muted);font-size:15px}
+
+section{padding-block:48px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.sec-head h2{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.01em;margin-top:8px}
+.sec-head p{color:var(--muted);max-width:52ch}
+
+/* client project */
+.client{background:var(--sheet);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.client-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;padding:36px}
+.client h3{font-size:28px;font-weight:700}
+.nda{display:inline-block;margin-top:12px;font-family:var(--f-mono);font-size:12px;padding:4px 8px;border-radius:4px;background:var(--chip);color:var(--muted)}
+.client .intro{margin-top:16px;color:var(--muted)}
+.before{margin-top:20px;display:grid;gap:8px;padding:0;list-style:none}
+.before li{display:grid;grid-template-columns:72px 1fr;gap:12px;font-size:16px}
+.before li .label{padding-top:3px}
+.steps{list-style:none;padding:0;margin:0;display:grid;gap:14px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:36px 1fr;gap:12px;counter-increment:s}
+.steps li::before{content:counter(s);font-family:var(--f-mono);font-size:13px;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);color:var(--ink);display:grid;place-items:center}
+.steps b{display:block}
+.steps span{color:var(--muted);font-size:15px}
+.measures{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
+.measure{padding:20px 24px;border-right:1px solid var(--line)}
+.measure:last-child{border-right:0}
+.measure b{font-family:var(--f-display);font-size:28px;font-variant-numeric:tabular-nums}
+.measure span{display:block;color:var(--muted);font-size:14px;line-height:1.35;margin-top:2px}
+.shots{display:grid;grid-template-columns:2fr 2fr 1fr;gap:12px;padding:24px;background:var(--chip);border-top:1px solid var(--line)}
+.shots figure{margin:0;display:grid;gap:6px;align-content:start;min-width:0}
+.shots img{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--line)}
+.shots figcaption{font-size:13px;color:var(--muted)}
+.shots .stack{display:grid;gap:12px;align-content:start}
+
+/* filters */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.filters button{font-family:var(--f-body);font-size:15px;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--sheet);color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* case records */
+.cases{display:grid;gap:16px}
+.case{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:26px 28px;display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:32px}
+.case .meta{display:grid;gap:10px;align-content:start}
+.case h3{font-size:22px;font-weight:700}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-family:var(--f-mono);font-size:11.5px;padding:3px 8px;border-radius:4px;border:1px solid var(--line);color:var(--muted)}
+.open{justify-self:start;font-family:var(--f-body);font-weight:600;font-size:15px;margin-top:6px;padding:8px 14px;border-radius:8px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.open:hover{background:var(--ink);color:var(--paper)}
+.record{display:grid;gap:12px;margin:0}
+.record div{display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px}
+.record dt{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.record dd{margin:0;max-width:68ch}
+.record .m{font-family:var(--f-mono);font-size:14px;color:var(--ink)}
+
+/* about */
+.about .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
+.about p{color:var(--muted);max-width:60ch}
+.about p + p{margin-top:14px}
+.skills{display:grid;gap:18px}
+.skills h3{font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:14.5px;padding:4px 10px;border-radius:6px;background:var(--chip)}
+
+/* contact */
+.contact{border-top:1px solid var(--line);padding-block:56px 72px}
+.contact h2{font-size:clamp(28px,4vw,40px);font-weight:700}
+.contact p.sub{color:var(--muted);margin-top:10px;max-width:56ch}
+.lines{display:grid;gap:10px;margin-top:24px;max-width:560px}
+.line{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--sheet);border:1px solid var(--line);border-radius:8px;padding:12px 16px}
+.line div{min-width:0}
+.line code{font-family:var(--f-mono);font-size:15px;user-select:all;overflow-wrap:anywhere}
+.copy{font-family:var(--f-body);font-size:14px;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;flex:none}
+
+
+.top .wrap > .tools{display:flex;gap:8px}
+.tbtn{font-family:var(--f-body);font-size:14px;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--sheet);color:var(--ink);cursor:pointer}
+.tbtn:hover{border-color:var(--muted)}
+/* document viewer */
+.viewer{position:fixed;inset:0;z-index:50;background:var(--scrim);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.vbar{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--sheet);border-bottom:1px solid var(--line);padding-block:10px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.vbar h2{font-size:17px;font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vbar .count{font-family:var(--f-mono);font-size:12px;color:var(--muted);flex:none}
+.vbar .right{display:flex;align-items:center;gap:12px;flex:none}
+.vpages{flex:1;overflow-y:auto;overscroll-behavior:contain;padding-block:20px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:grid;gap:16px;justify-items:center;align-content:start}
+.vpages img{display:block;width:100%;height:auto;background:#fff;border-radius:4px;box-shadow:0 2px 16px rgba(0,0,0,.25)}
+.vpages img.wide{max-width:1100px}
+.vpages img.tall{max-width:820px}
+body.lock{overflow:hidden}
+
+/* strengths */
+.sgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.scard{display:grid;gap:8px;align-content:start;padding:20px;background:var(--sheet);border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink)}
+.scard b{font-family:var(--f-display);font-size:19px;line-height:1.2}
+.scard > span:not(.label):not(.go){color:var(--muted);font-size:15px}
+.scard .go{font-size:14px;font-weight:600;margin-top:4px}
+.scard:hover{border-color:var(--muted)}
+/* matrix */
+.matrix-wrap,.exp-wrap{overflow-x:auto;margin-bottom:24px;border:1px solid var(--line);border-radius:12px;background:var(--sheet)}
+.matrix,.exptable{width:100%;border-collapse:collapse;font-size:15px}
+.matrix caption{caption-side:top;text-align:left;padding:14px 16px 0}
+.matrix th,.matrix td,.exptable th,.exptable td{padding:10px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.matrix tbody tr:last-child th,.matrix tbody tr:last-child td,.exptable tbody tr:last-child td{border-bottom:0}
+.matrix thead th,.exptable thead th{font-family:var(--f-mono);font-size:11.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.matrix td{text-align:center;width:16%}
+.matrix thead th:not(:first-child){text-align:center}
+.matrix td.y{color:var(--ink);font-size:14px}
+.matrix td.n{color:var(--line)}
+.matrix th a{text-decoration:none;font-weight:600}
+.matrix th a:hover{text-decoration:underline}
+.exptable td:first-child{white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums;font-size:14px}
+.exptable td b{display:block}
+.exptable td span{color:var(--muted);font-size:14px}
+.case{scroll-margin-top:80px}
+section[id]{scroll-margin-top:64px}
+
+@media (max-width:860px){
+  .sgrid{grid-template-columns:1fr 1fr}
+  .hero .wrap,.client-body,.about .wrap{grid-template-columns:1fr;gap:28px}
+  .case{grid-template-columns:1fr;gap:18px}
+  .measures{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .measure:nth-child(2){border-right:0}
+  .measure:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .shots{grid-template-columns:1fr 1fr}
+  .shots .mobile{grid-column:span 2;max-width:220px}
+  .top nav{display:none}
+}
+@media (max-width:520px){
+  .sgrid{grid-template-columns:1fr}
+  .matrix,.exptable{min-width:560px}
+  .client-body{padding:22px}
+  .case{padding:20px}
+  .record div{grid-template-columns:1fr;gap:2px}
+  .shots{grid-template-columns:1fr}
+  .shots .mobile{grid-column:auto}
+}
+@media (prefers-reduced-motion:no-preference){ .case{transition:border-color .15s} .case:hover{border-color:var(--muted)} }
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top">Jayesh Parihar</a>
+    <nav aria-label="Sections">
+      <a href="#client">Client work</a>
+      <a href="#cases">Case studies</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="tools">
+      <button type="button" class="tbtn" id="open-resume" data-doc="resume">Resume</button>
+      <button type="button" class="tbtn" id="theme-btn" aria-label="Switch colour theme">Dark</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="label">Associate Product Manager · Bengaluru · Remote, US/EU hours</p>
+        <h1>I turn customer conversations into <em>product decisions</em>.</h1>
+        <p class="lede">I spent 3.5 years in B2B SaaS sales, doing discovery and demos with buyers. Now I do the same work as a product manager: I find the real problem, decide what to build and measure whether it worked. I build with AI tools, and I can work through system design trade-offs with engineers.</p>
+        <div class="cta">
+          <a class="btn primary" href="#client">See the client build</a>
+          <a class="btn" href="#contact">Get in touch</a>
+          <button type="button" class="btn" data-doc="resume">View resume</button>
+        </div>
+      </div>
+      <div class="facts" aria-label="At a glance">
+        <div class="fact"><b>1 + 9</b><span>a live client build and 9 mentor-reviewed case studies</span></div>
+        <div class="fact"><b>50+</b><span>partners onboarded on a 3-person founding team</span></div>
+        <div class="fact"><b>3.5 yrs</b><span>customer-facing work in SaaS, telematics, PropTech, EdTech</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="strengths" class="strengths">
+    <div class="wrap">
+      <div class="sec-head"><div><p class="label">What I bring</p><h2>Four things a PM team needs, with proof</h2></div><p>Each card links to the work that shows it.</p></div>
+      <div class="sgrid">
+        <a class="scard" href="#case-uber"><span class="label">Product sense</span><b>I start from the user's problem</b><span>10+ rider and driver interviews for Uber; journey maps for Nykaa and MakeMyTrip.</span><span class="go">See the work</span></a>
+        <a class="scard" href="#case-zomato"><span class="label">Analytics &amp; metrics</span><b>I define success before building</b><span>North Star, metric trees and guardrails for Zomato, VitaFit and Airbnb.</span><span class="go">See the work</span></a>
+        <a class="scard" href="#client"><span class="label">Technical</span><b>I build, and I reason about systems</b><span>A 6-page marketplace built with Claude Code; a scaling plan from 5K to 2M users.</span><span class="go">See the work</span></a>
+        <a class="scard" href="#experience"><span class="label">Strategy &amp; GTM</span><b>I've sold what I'd build</b><span>INR 2.5 Cr closed on a founding team; 50+ partners onboarded; quota from 78% to 108%.</span><span class="go">See the work</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="client">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="label">Client work · current</p>
+          <h2>A B2B fleet marketplace, rebuilt so buyers can see the price</h2>
+        </div>
+        <p>Built with Claude Code for a fleet-telematics client. I also submitted it as my Claude Code project at Airtribe.</p>
+      </div>
+
+      <article class="client">
+        <div class="client-body">
+          <div>
+            <h3>Fleet hardware, software and parts marketplace</h3>
+            <span class="nda">Client name withheld under NDA</span>
+            <p class="intro">Fleet operators buy GPS trackers, AIS-140 devices, dashcams, sensors and spare parts, often in bulk. The old store made that hard.</p>
+            <ul class="before">
+              <li><span class="label">Before</span><span>No price on product cards, and a "Submit request" form instead of a buy button.</span></li>
+              <li><span class="label">Before</span><span>Pricing hidden in a separate tab, with one "Standard" plan and no bulk rates.</span></li>
+              <li><span class="label">After</span><span>Price + GST and the best bulk rate on every card, bulk slabs on every product page, and a cart and checkout.</span></li>
+            </ul>
+          </div>
+          <ol class="steps" aria-label="How I built it">
+            <li><div><b>Wrote the design rules first</b><span>9 reference screens became a style guide with 27 rule IDs. Every colour and spacing token cites the rule it came from.</span></div></li>
+            <li><div><b>Moved content into validated files</b><span>The catalog lives in JSON with 20 content rules. The build stops if a bulk tier costs more than the tier before it.</span></div></li>
+            <li><div><b>Added a design-compliance reviewer</b><span>A read-only subagent checks new code against the rules. It caught all 3 violations I planted in a product card.</span></div></li>
+            <li><div><b>Documented the project for the next session</b><span>A fresh session answered 5 of 5 questions about the product from the project brief alone, without opening a file.</span></div></li>
+            <li><div><b>Made vendor onboarding one command</b><span>A skill cleans a messy vendor CSV and adds it to the catalog. It rejects rows with no base price and flags odd bulk rates for the vendor.</span></div></li>
+          </ol>
+        </div>
+        <div class="measures">
+          <div class="measure"><b>6</b><span>working pages: home, catalog, product, cart, checkout, order</span></div>
+          <div class="measure"><b>47</b><span>written rules: 27 design, 20 content</span></div>
+          <div class="measure"><b>3 / 3</b><span>planted design violations caught</span></div>
+          <div class="measure"><b>10 → 14</b><span>products after one vendor import</span></div>
+        </div>
+        <div class="shots">
+          <figure><img src="img/home.jpg" alt="Marketplace home page with a search bar, headline stats and shop-by-category tiles" loading="lazy" width="1100" height="687"><figcaption>Home: one headline, one search</figcaption></figure>
+          <div class="stack">
+            <figure><img src="img/catalog.jpg" alt="Catalog grid where each card shows price plus GST and the bulk price for 501+ units" loading="lazy" width="1100" height="773"><figcaption>Catalog: price and bulk rate on every card</figcaption></figure>
+            <figure><img src="img/product.jpg" alt="Product page for an AIS-140 4G tracker with a bulk pricing table and savings per quantity tier" loading="lazy" width="1100" height="859"><figcaption>Product page: bulk slabs with savings</figcaption></figure>
+          </div>
+          <figure class="mobile"><img src="img/mobile.jpg" alt="Phone view of the marketplace home page in a single column" loading="lazy" width="520" height="1066"><figcaption>Phone, 390px</figcaption></figure>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="cases">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="label">Case studies · Airtribe AI-First PM, Jul–Oct 2026</p>
+          <h2>Nine problems, nine decisions</h2>
+        </div>
+        <p>Each one is reviewed by an industry mentor. Open any case to read the full deck or document right here.</p>
+      </div>
+
+      <div class="matrix-wrap"><table class="matrix"><caption class="label">Which work shows which skill</caption><thead><tr><th scope="col">Work</th><th scope="col">Product sense</th><th scope="col">Analytics &amp; metrics</th><th scope="col">Technical</th><th scope="col">Strategy &amp; GTM</th></tr></thead><tbody><tr><th scope="row"><a href="#client">Fleet marketplace build</a></th><td class="y" aria-label="yes">●</td><td class="n" aria-label="no">·</td><td class="y" aria-label="yes">●</td><td class="y" aria-label="yes">●</td></tr><tr><th scope="row"><a href="#case-support">Support AI Assistant</a></th><td class="y" aria-label="yes">●</td><td class="y" aria-label="yes">●</td><td class="y" aria-label="yes">●</td><td class="n" aria-label="no">·</td></tr><tr><th scope="row"><a href="#case-pulseguard">PulseGuard</a></th><td class="y" aria-label="yes">●</td><td class="y" aria-label="yes">●</td><td class="y" aria-label="yes">●</td><td class="y" aria-label="yes">●</td></tr><tr><th scope="row"><a href="#case-quickbite">QuickBite system design</a></th><td class="n" aria-label="no">·</td><td class="y" aria-label="yes">●</td><td class="y" aria-label="yes">●</td><td class="n" aria-label="no">·</td></tr><tr><th scope="row"><a href="#case-zomato">Zomato</a></th><td class="y" aria-label="yes">●</td><td class="y" aria-label="yes">●</td><td class="n" aria-label="no">·</td><td class="y" aria-label="yes">●</td></tr><tr><th scope="row"><a href="#case-airbnb">Airbnb India</a></th><td class="y" aria-label="yes">●</td><td class="y" aria-label="yes">●</td><td class="n" aria-label="no">·</td><td class="y" aria-label="yes">●</td></tr><tr><th scope="row"><a href="#case-vitafit">VitaFit Momentum</a></th><td class="y" aria-label="yes">●</td><td class="y" aria-label="yes">●</td><td class="n" aria-label="no">·</td><td class="n" aria-label="no">·</td></tr><tr><th scope="row"><a href="#case-uber">Uber pickup</a></th><td class="y" aria-label="yes">●</td><td class="n" aria-label="no">·</td><td class="n" aria-label="no">·</td><td class="n" aria-label="no">·</td></tr><tr><th scope="row"><a href="#case-nykaa">Nykaa</a></th><td class="y" aria-label="yes">●</td><td class="n" aria-label="no">·</td><td class="n" aria-label="no">·</td><td class="n" aria-label="no">·</td></tr><tr><th scope="row"><a href="#case-mmt">MakeMyTrip</a></th><td class="y" aria-label="yes">●</td><td class="n" aria-label="no">·</td><td class="n" aria-label="no">·</td><td class="n" aria-label="no">·</td></tr></tbody></table></div>
+
+      <div class="filters" role="group" aria-label="Filter case studies">
+        <button type="button" id="f-all" data-f="all" aria-pressed="true">All</button>
+        <button type="button" id="f-sense" data-f="sense" aria-pressed="false">Product sense</button>
+        <button type="button" id="f-metrics" data-f="metrics" aria-pressed="false">Analytics &amp; metrics</button>
+        <button type="button" id="f-tech" data-f="tech" aria-pressed="false">Technical</button>
+        <button type="button" id="f-strategy" data-f="strategy" aria-pressed="false">Strategy &amp; GTM</button>
+      </div>
+
+      <div class="cases">
+        <article class="case" id="case-support" data-k="tech sense metrics">
+          <div class="meta">
+            <p class="label">Support operations</p>
+            <h3>Support AI Assistant</h3>
+            <div class="tags"><span class="tag">AI agents</span><span class="tag">Claude skills</span></div>
+            <button type="button" class="open" data-doc="support-ai-assistant">Open the deck</button>
+          </div>
+          <dl class="record">
+            <div><dt>Problem</dt><dd>Five support jobs, from ticket triage to weekly QA. Which should be a reusable skill, which an agent, and which just a scheduled script?</dd></div>
+            <div><dt>Decision</dt><dd>2 skills (triage, policy-safe replies), 2 agents (at-risk customer briefing, bug check) and 1 plain batch job for QA. I built and tested the 4 AI pieces.</dd></div>
+            <div><dt>Measure</dt><dd class="m">2/5 test tickets escalated at P1 (live outage, GDPR) · reply checker: 0 invented figures vs 3 in the draft · 2/2 bug reports routed right</dd></div>
+          </dl>
+        </article>
+
+        <article class="case" id="case-pulseguard" data-k="sense metrics tech strategy">
+          <div class="meta">
+            <p class="label">Trust &amp; Safety · short video</p>
+            <h3>PulseGuard</h3>
+            <div class="tags"><span class="tag">PRD</span><span class="tag">ML signals</span><span class="tag">Policy</span></div>
+            <button type="button" class="open" data-doc="pulseguard-deck">Open the deck</button>
+          </div>
+          <dl class="record">
+            <div><dt>Problem</dt><dd>One reel grew into a national protest in 72 hours with zero early warnings. The feed ranks by speed of engagement and can't tell fun-viral from a call to act.</dd></div>
+            <div><dt>Decision</dt><dd>Score only the fastest-growing 0.1% of reels on content, spread shape and source. Respond with graded, reversible distribution limits decided by people, not take-downs.</dd></div>
+            <div><dt>Measure</dt><dd class="m">≥80% flagged before reaching 3 states · median upload-to-flag ≤3 hrs · guardrail: ≤15% of actions overturned</dd></div>
+          </dl>
+        </article>
+
+        <article class="case" id="case-quickbite" data-k="tech metrics">
+          <div class="meta">
+            <p class="label">Food delivery · architecture</p>
+            <h3>QuickBite: scaling from 5K to 2M users</h3>
+            <div class="tags"><span class="tag">System design</span><span class="tag">Trade-offs</span></div>
+            <button type="button" class="open" data-doc="quickbite-system-design">Read the brief</button>
+          </div>
+          <dl class="record">
+            <div><dt>Problem</dt><dd>Leadership wants 2M users in 12 months. Engineering has to choose an architecture without paying for that scale on day one.</dd></div>
+            <div><dt>Decision</dt><dd>Launch as a modular monolith with read replicas. Extract live rider tracking first, only when its location pings start slowing down orders.</dd></div>
+            <div><dt>Measure</dt><dd class="m">strong consistency for payments and order status · eventual for ratings and search · 4 incident drills written out</dd></div>
+          </dl>
+        </article>
+
+        <article class="case" id="case-zomato" data-k="metrics sense strategy">
+          <div class="meta">
+            <p class="label">Food delivery · Tier-1 metros</p>
+            <h3>Zomato: funnel, cohorts and North Star</h3>
+            <div class="tags"><span class="tag">Funnel</span><span class="tag">Cohorts</span><span class="tag">Metric tree</span></div>
+            <button type="button" class="open" data-doc="zomato-tier1-optimization">Read the analysis</button>
+          </div>
+          <dl class="record">
+            <div><dt>Problem</dt><dd>Users drop off across a 7-stage journey, and many churn after their first discounted order.</dd></div>
+            <div><dt>Decision</dt><dd>Fix cart-to-checkout first by showing all fees upfront, since these users already spent 5–10 minutes choosing. For new users, a "Next 3 Meals" milestone track.</dd></div>
+            <div><dt>Measure</dt><dd class="m">North Star: weekly on-time, well-rated orders per active user, replacing GMV · one hypothesis and guardrail per stage</dd></div>
+          </dl>
+        </article>
+
+        <article class="case" id="case-airbnb" data-k="strategy metrics sense">
+          <div class="meta">
+            <p class="label">Travel marketplace · India</p>
+            <h3>Airbnb: growth for Tier 2/3 India</h3>
+            <div class="tags"><span class="tag">PLG</span><span class="tag">Growth loops</span><span class="tag">Monetisation</span></div>
+            <button type="button" class="open" data-doc="airbnb-india-strategy">Read the strategy</button>
+          </div>
+          <dl class="record">
+            <div><dt>Problem</dt><dd>Domestic travel to smaller cities is growing, but listings there are thin. Would-be hosts drop off at English-only forms and bank-wire payouts.</dd></div>
+            <div><dt>Decision</dt><dd>P0: vernacular onboarding with UPI payouts, plus a WhatsApp host referral loop. Test with a static Hindi page and manual ops before building anything.</dd></div>
+            <div><dt>Measure</dt><dd class="m">North Star: active earning hosts in Tier 2/3 · scale only if publish rate lifts &gt;30% vs English control</dd></div>
+          </dl>
+        </article>
+
+        <article class="case" id="case-vitafit" data-k="sense metrics">
+          <div class="meta">
+            <p class="label">Fitness app · retention</p>
+            <h3>VitaFit Momentum</h3>
+            <div class="tags"><span class="tag">PRD</span><span class="tag">User flows</span><span class="tag">A/B test</span></div>
+            <button type="button" class="open" data-doc="vitafit-momentum-prd">Read the PRD</button>
+          </div>
+          <dl class="record">
+            <div><dt>Problem</dt><dd>Users start strong, then drop off after days 14–21. Missing one workout makes them feel guilty, and they quit.</dd></div>
+            <div><dt>Decision</dt><dd>Personal weekly goals with a forgiving "streak saver", plus instructor-led groups of up to 100 who pool minutes instead of competing on a leaderboard.</dd></div>
+            <div><dt>Measure</dt><dd class="m">North Star: 4-week retention, +15% target · 5% beta, then a 6-week A/B test · guardrail: workout drop-out rate</dd></div>
+          </dl>
+        </article>
+
+        <article class="case" id="case-uber" data-k="sense">
+          <div class="meta">
+            <p class="label">Ride hailing · urban pickup</p>
+            <h3>Uber: the pickup point problem</h3>
+            <div class="tags"><span class="tag">User interviews</span><span class="tag">Problem framing</span></div>
+            <button type="button" class="open" data-doc="uber-pickup-summary">Open the deck</button>
+          </div>
+          <dl class="record">
+            <div><dt>Problem</dt><dd>After booking, riders can't find the right legal pickup spot in crowded areas. Drivers end up calling them, which causes delays and cancellations.</dd></div>
+            <div><dt>Decision</dt><dd>Guide riders before confusion starts: suggest the nearest legal pickup point, give walking directions to it, and add a shared orientation view for rider and driver.</dd></div>
+            <div><dt>Measure</dt><dd class="m">10+ interviews with riders and drivers · roll out first in malls, stadiums and downtown areas</dd></div>
+          </dl>
+        </article>
+
+        <article class="case" id="case-nykaa" data-k="sense">
+          <div class="meta">
+            <p class="label">Beauty e-commerce</p>
+            <h3>Nykaa: buying skincare by skin type</h3>
+            <div class="tags"><span class="tag">Journey mapping</span><span class="tag">Discovery</span></div>
+            <button type="button" class="open" data-doc="nykaa-executive-summary">Open the deck</button>
+          </div>
+          <dl class="record">
+            <div><dt>Problem</dt><dd>Search for "face mask for dry skin" works well, but filters are deeply nested, there's no side-by-side comparison, and sponsored listings crowd the top.</dd></div>
+            <div><dt>Decision</dt><dd>Auto-apply the user's skin profile as a filter, add a one-tap comparison of size, price per ml and ingredients, and show reviews from people with the same skin type first.</dd></div>
+            <div><dt>Measure</dt><dd class="m">5-step journey: search → browse → filter → evaluate → buy · friction mapped at each step</dd></div>
+          </dl>
+        </article>
+
+        <article class="case" id="case-mmt" data-k="sense">
+          <div class="meta">
+            <p class="label">Online travel · flight booking</p>
+            <h3>MakeMyTrip: usability review</h3>
+            <div class="tags"><span class="tag">Nielsen heuristics</span><span class="tag">UX laws</span></div>
+            <button type="button" class="open" data-doc="makemytrip-ux-summary">Open the summary</button>
+          </div>
+          <dl class="record">
+            <div><dt>Problem</dt><dd>The flight search shows every input at once with equal weight, error messages don't say how to fix them, and airport names rely on memory.</dd></div>
+            <div><dt>Decision</dt><dd>Order the search as Where → When → Who → Search, autocomplete city + airport + code, and put secondary flight details behind "View details".</dd></div>
+            <div><dt>Measure</dt><dd class="m">7 usability issues, each mapped to a heuristic or a law (Hick's law, recognition over recall)</dd></div>
+          </dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="exp">
+    <div class="wrap">
+      <div class="sec-head"><div><p class="label">Experience</p><h2>3.5 years close to the customer</h2></div><p>Every role was discovery first: what is broken, who feels it, and what they would pay to fix.</p></div>
+      <div class="exp-wrap"><table class="exptable">
+        <thead><tr><th scope="col">When</th><th scope="col">Role</th><th scope="col">Result</th></tr></thead>
+        <tbody>
+          <tr><td>Apr 2026 – now</td><td><b>Business Development Manager, founding team</b><span>B2B fleet-telematics marketplace (under NDA)</span></td><td>INR 2.5 Cr closed in 4 months · 50+ partners onboarded</td></tr>
+          <tr><td>Jun 2025 – Mar 2026</td><td><b>Sales Development Representative</b><span>US B2B SaaS clients, remote</span></td><td>+35% qualified meetings from A/B-tested messaging · 15+ meetings a month</td></tr>
+          <tr><td>Oct 2024 – Jan 2025</td><td><b>Business Development Manager</b><span>Mobility Foresights, market research</span></td><td>17 enterprise deals, $58K · $324.6K pipeline</td></tr>
+          <tr><td>Nov 2023 – Jun 2024</td><td><b>Assistant Manager, Corporate Sales</b><span>99acres.com (Info Edge)</span></td><td>Quota from 78% to 108% · 30+ new B2B customers</td></tr>
+          <tr><td>Nov 2022 – Aug 2023</td><td><b>Business Development Associate</b><span>BYJU'S</span></td><td>Quota from 58% to 92% · INR 29 lakh closed</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="wrap">
+      <div>
+        <p class="label">About</p>
+        <h2 style="font-size:clamp(28px,4vw,40px);margin-top:8px">From closing deals to shaping products</h2>
+        <p style="margin-top:18px">I learned product from the sales side: years of conversations about what buyers need and why deals stall. I want to be the PM who brings that customer voice into every decision.</p>
+        <p>Today I'm on a 3-person founding team building a B2B marketplace for fleet businesses, where I onboarded 50+ partners and pass customer feedback straight to the product team. I'm completing Airtribe's AI-First PM program and looking for an APM role or PM internship.</p>
+      </div>
+      <div class="skills">
+        <div><h3>Product</h3><div class="chips"><span>Discovery &amp; interviews</span><span>PRDs</span><span>User flows</span><span>Prioritisation (RICE)</span><span>Go-to-market</span><span>Pricing</span></div></div>
+        <div><h3>Metrics</h3><div class="chips"><span>North Star &amp; metric trees</span><span>Funnels</span><span>Cohorts &amp; retention</span><span>A/B tests</span><span>Guardrails</span></div></div>
+        <div><h3>AI &amp; technical</h3><div class="chips"><span>Claude Code</span><span>Skills &amp; subagents</span><span>LLM evaluation</span><span>n8n</span><span>System design basics</span></div></div>
+        <div><h3>Tools</h3><div class="chips"><span>Figma</span><span>Claude</span><span>ChatGPT</span><span>HubSpot</span><span>Salesforce</span><span>Zoho CRM</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <p class="label">Contact</p>
+      <h2 style="margin-top:8px">Hiring for an APM or PM intern?</h2>
+      <p class="sub">I'm open to remote roles on US or EU hours and can work as a contractor. I can start right away.</p>
+      <div class="lines">
+        <div class="line"><div><p class="label">Email</p><code id="v-email">pariharjayesh1092@gmail.com</code></div><button type="button" class="copy" id="c-email" data-t="v-email">Copy</button></div>
+        <div class="line"><div><p class="label">LinkedIn</p><code><a href="https://www.linkedin.com/in/jayeshparihar" target="_blank" rel="noopener" id="v-li">linkedin.com/in/jayeshparihar</a></code></div><button type="button" class="copy" id="c-li" data-t="v-li">Copy</button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="v-title" hidden>
+  <div class="vbar">
+    <h2 id="v-title">Document</h2>
+    <div class="right"><span class="count" id="v-count"></span><button type="button" class="tbtn" id="v-close">Close</button></div>
+  </div>
+  <div class="vpages" id="v-pages" tabindex="-1"></div>
+</div>
+
+<script>
+(function(){
+  var btns=document.querySelectorAll('.filters button'), cases=document.querySelectorAll('.case');
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    var f=b.dataset.f;
+    btns.forEach(function(x){x.setAttribute('aria-pressed', x===b?'true':'false')});
+    cases.forEach(function(c){c.hidden = !(f==='all' || c.dataset.k.split(' ').indexOf(f)>-1)});
+  })});
+  document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){
+    var el=document.getElementById(b.dataset.t), txt=el.textContent.trim();
+    var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1600)};
+    var fallback=function(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected';};
+    try{navigator.clipboard.writeText(txt).then(done,fallback)}catch(e){fallback()}
+  })});
+})();
+</script>
+
+<script>
+(function(){
+  var DOCS={"airbnb-india-strategy":[["airbnb-india-strategy-01.jpg",1000,1415],["airbnb-india-strategy-02.jpg",1000,1415],["airbnb-india-strategy-03.jpg",1000,1415],["airbnb-india-strategy-04.jpg",1000,1415],["airbnb-india-strategy-05.jpg",1000,1415],["airbnb-india-strategy-06.jpg",1000,1415],["airbnb-india-strategy-07.jpg",1000,1415],["airbnb-india-strategy-08.jpg",1000,1415],["airbnb-india-strategy-09.jpg",1000,1415],["airbnb-india-strategy-10.jpg",1000,1415],["airbnb-india-strategy-11.jpg",1000,1415],["airbnb-india-strategy-12.jpg",1000,1415],["airbnb-india-strategy-13.jpg",1000,1415],["airbnb-india-strategy-14.jpg",1000,1415]],"makemytrip-ux-summary":[["makemytrip-ux-summary-1.jpg",1400,788],["makemytrip-ux-summary-2.jpg",1400,788],["makemytrip-ux-summary-3.jpg",1400,788],["makemytrip-ux-summary-4.jpg",1400,788],["makemytrip-ux-summary-5.jpg",1400,788],["makemytrip-ux-summary-6.jpg",1400,788],["makemytrip-ux-summary-7.jpg",1400,788],["makemytrip-ux-summary-8.jpg",1400,788]],"nykaa-executive-summary":[["nykaa-executive-summary-1.jpg",1400,788],["nykaa-executive-summary-2.jpg",1400,788],["nykaa-executive-summary-3.jpg",1400,788],["nykaa-executive-summary-4.jpg",1400,788],["nykaa-executive-summary-5.jpg",1400,788]],"pulseguard-deck":[["pulseguard-deck-1.jpg",1400,788],["pulseguard-deck-2.jpg",1400,788],["pulseguard-deck-3.jpg",1400,788],["pulseguard-deck-4.jpg",1400,788],["pulseguard-deck-5.jpg",1400,788],["pulseguard-deck-6.jpg",1400,788],["pulseguard-deck-7.jpg",1400,788],["pulseguard-deck-8.jpg",1400,788]],"quickbite-system-design":[["quickbite-system-design-01.jpg",1000,1415],["quickbite-system-design-02.jpg",1000,1415],["quickbite-system-design-03.jpg",1000,1415],["quickbite-system-design-04.jpg",1000,1415],["quickbite-system-design-05.jpg",1000,1415],["quickbite-system-design-06.jpg",1000,1415],["quickbite-system-design-07.jpg",1000,1415],["quickbite-system-design-08.jpg",1000,1415],["quickbite-system-design-09.jpg",1000,1415],["quickbite-system-design-10.jpg",1000,1415],["quickbite-system-design-11.jpg",1000,1415],["quickbite-system-design-12.jpg",1000,1415],["quickbite-system-design-13.jpg",1000,1415]],"resume":[["resume-1.jpg",1000,1415]],"support-ai-assistant":[["support-ai-assistant-1.jpg",1400,788],["support-ai-assistant-2.jpg",1400,788],["support-ai-assistant-3.jpg",1400,788],["support-ai-assistant-4.jpg",1400,788],["support-ai-assistant-5.jpg",1400,788],["support-ai-assistant-6.jpg",1400,788]],"uber-pickup-summary":[["uber-pickup-summary-1.jpg",1400,788],["uber-pickup-summary-2.jpg",1400,788],["uber-pickup-summary-3.jpg",1400,788],["uber-pickup-summary-4.jpg",1400,788],["uber-pickup-summary-5.jpg",1400,788],["uber-pickup-summary-6.jpg",1400,788],["uber-pickup-summary-7.jpg",1400,788],["uber-pickup-summary-8.jpg",1400,788]],"vitafit-momentum-prd":[["vitafit-momentum-prd-1.jpg",1000,1415],["vitafit-momentum-prd-2.jpg",1000,1415],["vitafit-momentum-prd-3.jpg",1000,1415]],"zomato-tier1-optimization":[["zomato-tier1-optimization-1.jpg",1000,1415],["zomato-tier1-optimization-2.jpg",1000,1415],["zomato-tier1-optimization-3.jpg",1000,1415],["zomato-tier1-optimization-4.jpg",1000,1415]]};
+  var TITLES={"resume":"Resume","support-ai-assistant":"Support AI Assistant","pulseguard-deck":"PulseGuard","airbnb-india-strategy":"Airbnb: growth for Tier 2/3 India","zomato-tier1-optimization":"Zomato: funnel, cohorts and North Star","vitafit-momentum-prd":"VitaFit Momentum PRD","uber-pickup-summary":"Uber: the pickup point problem","nykaa-executive-summary":"Nykaa: buying skincare by skin type","makemytrip-ux-summary":"MakeMyTrip: usability review","quickbite-system-design":"QuickBite: system design brief"};
+  var root=document.documentElement;
+  /* in-page links scroll inside the page */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="#"]'); if(!a) return;
+    var id=a.getAttribute('href').slice(1); var t=id?document.getElementById(id):null;
+    e.preventDefault(); (t||document.body).scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  });
+  /* theme toggle */
+  var tb=document.getElementById('theme-btn');
+  function isDark(){var d=root.getAttribute('data-theme');return d?d==='dark':matchMedia('(prefers-color-scheme: dark)').matches}
+  function label(){tb.textContent=isDark()?'Light':'Dark'}
+  try{var saved=localStorage.getItem('pf-theme');if(saved)root.setAttribute('data-theme',saved)}catch(e){}
+  label(); matchMedia('(prefers-color-scheme: dark)').addEventListener('change',label);
+  tb.addEventListener('click',function(){var n=isDark()?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('pf-theme',n)}catch(e){}label()});
+  /* document viewer */
+  var v=document.getElementById('viewer'),vp=document.getElementById('v-pages'),vt=document.getElementById('v-title'),vc=document.getElementById('v-count'),last=null;
+  function openDoc(key,btn){var pages=DOCS[key];if(!pages)return;last=btn;vt.textContent=TITLES[key]||'Document';vc.textContent=pages.length+(pages.length>1?' pages':' page');
+    vp.innerHTML='';pages.forEach(function(p,i){var im=new Image();im.src='pages/'+p[0];im.width=p[1];im.height=p[2];im.alt=(TITLES[key]||'Document')+', page '+(i+1);im.className=p[1]>p[2]?'wide':'tall';if(i>1)im.loading='lazy';vp.appendChild(im)});
+    v.hidden=false;document.body.classList.add('lock');vp.scrollTop=0;document.getElementById('v-close').focus()}
+  function closeDoc(){v.hidden=true;document.body.classList.remove('lock');vp.innerHTML='';if(last)last.focus()}
+  document.querySelectorAll('[data-doc]').forEach(function(b){b.addEventListener('click',function(){openDoc(b.dataset.doc,b)})});
+  document.getElementById('v-close').addEventListener('click',closeDoc);
+  v.addEventListener('click',function(e){if(e.target===v)closeDoc()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!v.hidden)closeDoc()});
+})();
+</script>
+
+</body>
+</html>
